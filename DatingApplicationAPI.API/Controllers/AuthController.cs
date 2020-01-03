@@ -32,6 +32,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDTO userForRegisterDTO)
         {  
+            //throw new Exception("error occured");
             userForRegisterDTO.Username=userForRegisterDTO.Username.ToLower();
             if(await _repo.UserExists(userForRegisterDTO.Username))
             return BadRequest("Username already exists");
@@ -43,7 +44,9 @@ namespace DatingApp.API.Controllers
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO userForLoginDTO)
-        {
+        {   
+            
+            // throw new Exception("error occured");
             var userFromRepo= await _repo.Login(userForLoginDTO.Username.ToLower(),userForLoginDTO.Password);
             if(userFromRepo == null)
             return Unauthorized();
@@ -65,6 +68,8 @@ namespace DatingApp.API.Controllers
             return Ok(new {
                 token=tokenHandler.WriteToken(token)
             });
+            
         }
+        
     }
 } 
