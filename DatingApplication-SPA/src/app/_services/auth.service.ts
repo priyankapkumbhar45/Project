@@ -41,6 +41,7 @@ return this.http.post(this.baseUrl + 'login', model)
   loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+    // if expired then returns true
   }
 
 }
